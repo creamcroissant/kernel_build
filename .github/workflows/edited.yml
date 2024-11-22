@@ -31,6 +31,11 @@ jobs:
         run: |
           git clone --depth=1 ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} kernel-source
 
+      - name: Configure kernel
+        run: |
+          cd kernel-source
+          make ${args} oldconfig
+
       - name: Build kernel
         run: |
           export KBUILD_BUILD_USER="zclkkk"
