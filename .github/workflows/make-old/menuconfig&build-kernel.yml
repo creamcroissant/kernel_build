@@ -31,6 +31,7 @@ jobs:
         run: |
           cd kernel-source
           make oldconfig
+          make menuconfig
 
       - name: Build kernel
         run: |
