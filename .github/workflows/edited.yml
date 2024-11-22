@@ -30,8 +30,7 @@ jobs:
       - name: Configure kernel
         run: |
           cd kernel-source
-          make oldconfig
-          make menuconfig
+          make olddefconfig
 
       - name: Build kernel
         run: |
