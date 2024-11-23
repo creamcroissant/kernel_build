@@ -28,24 +28,15 @@ jobs:
         run: |
           git clone --depth=1 ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} kernel-source
 
-      - name: Backup .config before cleaning
-        run: |
-          cd kernel-source
-          yes "" | make ARCH=arm64 clover_defconfig
-          cp .config ../.config_backup
-
       - name: Clean kernel source
         run: |
           cd kernel-source
           make mrproper
 
-      - name: Restore .config after cleaning
-        run: |
-          cp .config_backup kernel-source/.config
-
       - name: Configure kernel
         run: |
           cd kernel-source
+          yes "" | make ARCH=arm64 clover_defconfig
           sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' .config
           yes "" | make ARCH=arm64 oldconfig
 
@@ -63,7 +54,6 @@ jobs:
           cd kernel-source
           make ${args} defconfig
           sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' ../out/.config
-          yes "" | make ARCH=arm64 oldconfig
           make -j$(($(getconf _NPROCESSORS_ONLN) * 2)) ${args}
 
       - name: Package kernel
