@@ -28,6 +28,13 @@ jobs:
         run: |
           git clone --depth=1 ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} kernel-source
 
+      - name: Clean and configure kernel
+        run: |
+          cd kernel-source
+          make mrproper
+          make menuconfig
+          make
+
       - name: Build kernel
         run: |
           export KBUILD_BUILD_USER="zclkkk"
@@ -65,3 +72,8 @@ jobs:
         with:
           name: output_kernel
           path: AnyKernel3/*
+
+      - name: Clean and build Android
+        run: |
+          tools/bazel clean --expunge
+          tools/bazel build //common:kernel_aarch64_dist
