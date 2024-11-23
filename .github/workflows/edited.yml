@@ -32,7 +32,7 @@ jobs:
         run: |
           cd kernel-source
           make mrproper
-          make ARCH=arm64 clover_defconfig
+          yes "" | make ARCH=arm64 clover_defconfig
           sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' .config
           make
 
@@ -73,8 +73,3 @@ jobs:
         with:
           name: output_kernel
           path: AnyKernel3/*
-
-      - name: Clean and build Android
-        run: |
-          tools/bazel clean --expunge
-          tools/bazel build //common:kernel_aarch64_dist
