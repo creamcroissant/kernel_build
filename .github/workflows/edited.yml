@@ -41,7 +41,7 @@ jobs:
 
       - name: Restore .config after cleaning
         run: |
-          cp ../.config_backup kernel-source/.config
+          cp .config_backup kernel-source/.config
 
       - name: Configure kernel
         run: |
