@@ -28,10 +28,10 @@ jobs:
         run: |
           git clone --depth=1 ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} kernel-source
 
-      - name: Create .config from defconfig
+      - name: Create .config from oldconfig
         run: |
           cd kernel-source
-          make defconfig
+          yes "" | make oldconfig
 
       - name: Build kernel
         run: |
