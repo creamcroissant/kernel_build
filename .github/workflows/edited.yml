@@ -20,7 +20,7 @@ jobs:
       - name: Pull toolchain
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang-14 gcc-9 g++-9
+          sudo apt-get install -y clang-12 gcc-9 g++-9
           git clone --depth=1 https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 aarch64-linux-android-4.9
           git clone --depth=1 https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 arm-linux-androideabi-4.9
 
