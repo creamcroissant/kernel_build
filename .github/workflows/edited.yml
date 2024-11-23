@@ -32,8 +32,8 @@ jobs:
         run: |
           cd kernel-source
           make mrproper
-          make defconfig
-          sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' ../out/.config
+          yes "" | make menuconfig
+          sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' .config
           make
 
       - name: Build kernel
