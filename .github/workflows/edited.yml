@@ -35,7 +35,6 @@ jobs:
           yes "" | make ARCH=arm64 clover_defconfig
           sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' .config
           yes "" | make ARCH=arm64 oldconfig
-          make
 
       - name: Build kernel
         run: |
@@ -51,7 +50,6 @@ jobs:
           cd kernel-source
           make ${args} defconfig
           sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' ../out/.config
-          yes "" | make ARCH=arm64 oldconfig
           make -j$(($(getconf _NPROCESSORS_ONLN) * 2)) ${args}
 
       - name: Package kernel
