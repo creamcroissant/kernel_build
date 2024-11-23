@@ -32,7 +32,7 @@ jobs:
         run: |
           cd kernel-source
           make mrproper
-          make clover_defconfig
+          make ARCH=arm64 clover_defconfig
           sed -i 's/CONFIG_NR_CPUS=[0-9]*/CONFIG_NR_CPUS=64/' .config
           make
 
